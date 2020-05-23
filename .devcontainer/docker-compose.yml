@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  app:
+    init: true
+    build: .
+    command: sleep infinity
+    volumes:
+      - ..:/original:cached
+      - app:/go/src
+      - ../.devcontainer:/go/src/.devcontainer:cached
+      - home:/home/app
+      - ~/.gitconfig:/home/app/.gitconfig:ro
+      - ~/.zshrc:/home/app/.zshrc:ro
+      - ~/.netrc:/home/app/.netrc:ro
+  mongo:
+    image: mongo:3.6
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  app:
+  home:
+  mongo-data:
